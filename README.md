@@ -4,21 +4,25 @@
 
 ## Tech Stack
 
-| Category | Stack |
-|---|---|
-| Language | Python |
-| Model | TensorFlow, Keras, MobileNetV2 |
-| Vision | OpenCV, MediaPipe |
-| Optimization | ONNX, TensorRT |
-| Device | Jetson Nano |
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
+![Keras](https://img.shields.io/badge/Keras-D00000?style=flat-square&logo=keras&logoColor=white)
+![MobileNetV2](https://img.shields.io/badge/MobileNetV2-4285F4?style=flat-square&logo=google&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-0097A7?style=flat-square&logo=google&logoColor=white)
+![ONNX](https://img.shields.io/badge/ONNX-005CED?style=flat-square&logo=onnx&logoColor=white)
+![TensorRT](https://img.shields.io/badge/TensorRT-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![Jetson Nano](https://img.shields.io/badge/Jetson%20Nano-76B900?style=flat-square&logo=nvidia&logoColor=white)
+
 
 ## YouTube Demo
 
-아래 링크를 클릭하면 YouTube 데모 영상으로 이동합니다.
+아래 이미지를 클릭하면 YouTube 데모 영상으로 이동합니다.
+[![YouTube Demo](https://img.shields.io/badge/YouTube-Demo%20Video-FF0000?style=flat-square&logo=youtube&logoColor=white)](https://youtu.be/wPea2OLFxoQ)
 
-https://youtu.be/wPea2OLFxoQ
-
-<!-- 여기에 YouTube 데모 썸네일 이미지를 붙여넣기 -->
+<a href="https://youtu.be/wPea2OLFxoQ">
+  <img width="720" alt="YouTube Demo" src="https://github.com/user-attachments/assets/6b36b529-acfd-4bc6-9e0f-ef6999ec0719" />
+</a>
 
 ## 프로젝트 개요
 
@@ -34,29 +38,36 @@ https://youtu.be/wPea2OLFxoQ
 - Top-3 예측 후보 출력
 - 예측된 자모를 조합하여 한글 문자열 생성
 - 잘못 인식된 음소 수정 UI 제공
+
 - Jetson Nano + TensorRT 기반 실시간 엣지 추론
 
 ## Preview
 
-### 실시간 인식 UI
+### 학습 및 추론과정
 
-<img width="642" height="425" alt="demo_ui" src="https://github.com/user-attachments/assets/dc6642b8-010a-4bb9-a8cd-91bfd4285856" />
+<img width="997" height="560" alt="image" src="https://github.com/user-attachments/assets/fe9d4711-3655-4dd1-90bf-a07bafa2c92e" />
+
+카메라로 입력된 손 이미지를 MediaPipe로 검출하고 MobileNetV2 모델로 지문자를 분류하는 전체 학습 및 추론 흐름입니다.
+
+---
 
 ### 모델 구조
 
-<img width="2000" height="1125" alt="model_architecture" src="https://github.com/user-attachments/assets/fbd52fda-ef73-4213-a84c-5b0b39ef708e" />
+<img width="2000" height="1125" alt="model_architecture" src="https://github.com/user-attachments/assets/c83ad26b-3860-4608-a411-aaa901a0b9e4" />
 
-### ONNX 및 TensorRT 변환 흐름
+MobileNetV2 위에 Dense Layer를 추가하여 한글 지문자 31개 클래스를 분류하도록 구성한 모델입니다.
 
-<!-- 여기에 ONNX 및 TensorRT 변환 흐름 이미지 붙여넣기 -->
+---
 
-### 입력 및 전처리
+### 데이터 크롭, 미디어파이프 진행
 
-<!-- 여기에 입력 및 전처리 이미지 붙여넣기 -->
+<img width="333" height="301" alt="image" src="https://github.com/user-attachments/assets/0b9bd354-332c-438c-a387-4ef163579b4a" />
 
-### UI 구성
+다양한 구도로 촬영한 손 이미지를 MediaPipe로 손 영역을 검출하고 crop하여 학습 데이터로 구축했습니다.
 
-<!-- 여기에 UI 구성 이미지 붙여넣기 -->
+---
+
+
 
 ## 팀원 역할
 
@@ -93,6 +104,8 @@ Camera Input
 
 ## 모델 구조
 
+<img width="941" height="791" alt="image" src="https://github.com/user-attachments/assets/c7f77f59-9a8d-4200-ac77-557433c5dad4" />
+
 MobileNetV2를 기반으로 한글 지문자 31개 클래스를 분류하는 모델을 구성했습니다.
 
 ```text
@@ -121,6 +134,8 @@ MobileNetV2: 잘라낸 손 이미지 분류에 적합
 MobileNetV2는 경량 모델이기 때문에 Jetson Nano에서 실시간으로 동작하기 유리하며, Transfer Learning을 통해 제한된 데이터셋에서도 안정적인 성능을 낼 수 있습니다.
 
 ## 데이터셋 구축
+
+<img width="759" height="895" alt="image" src="https://github.com/user-attachments/assets/1ee2dede-49d4-4e65-b30b-14fbabf78f63" />
 
 자음 14개와 모음 17개, 총 31개의 한글 지문자 클래스를 대상으로 데이터셋을 구축했습니다.
 
@@ -153,7 +168,41 @@ Zoom: 카메라와 손의 거리 차이 대응
 
 단, 지문자는 손 방향이 의미를 가지기 때문에 좌우 반전은 적용하지 않았습니다.
 
+## Confusion Matrix
+
+<img width="1975" height="943" alt="image" src="https://github.com/user-attachments/assets/a4b554b3-a6e9-40bf-8bca-e17e1592d5eb" />
+
+모델의 분류 성능을 확인하기 위해 자음과 모음 각각의 혼동행렬을 분석했습니다.
+
+#### 자음 14개 클래스
+
+자음 클래스는 대부분의 예측값이 대각선에 집중되어 있어, 실제 지문자와 예측 지문자가 대부분 일치하는 것을 확인했습니다.
+
+- 대부분의 자음 클래스에서 높은 정확도 확인
+- 20회 테스트 기준 대부분 20회 정확히 인식
+- 일부 유사한 손 모양에서 소량의 오인식 발생
+
+
+#### 모음 17개 클래스
+
+모음 클래스 역시 전반적으로 높은 분류 성능을 보였지만, 일부 모음은 손 모양이 비슷해 자음보다 약간의 혼동이 발생했습니다.
+
+- 대부분의 모음 클래스에서 안정적인 인식 결과 확인
+- 일부 클래스에서 18~20회 수준의 인식 결과 확인
+- 특히 형태가 유사한 모음에서 오인식 가능성 확인
+
+
+
+### 결과 요약
+
+혼동행렬 분석 결과, 대부분의 클래스가 실제값과 예측값이 일치하는 대각선에 집중되어 있어 모델이 지문자를 안정적으로 분류하는 것을 확인했습니다.  
+다만 손 모양이 유사한 일부 지문자에서는 오인식이 발생하여, 해당 클래스는 추가 데이터 수집과 보강이 필요하다고 판단했습니다.
+
+
+
 ## ONNX 변환
+
+<img width="2000" height="1125" alt="onnx_flow" src="https://github.com/user-attachments/assets/e368c0a4-3e3e-40c9-a2e7-83d17b1b93e2" />
 
 Keras 모델을 Jetson Nano에서 실행 가능한 형식으로 변환하기 위해 ONNX를 사용했습니다.
 
@@ -168,6 +217,8 @@ ONNX 변환을 통해 Jetson Nano 실행 환경과의 호환성을 확보하고,
 
 ## 추론 파이프라인
 
+<img width="1007" height="571" alt="image" src="https://github.com/user-attachments/assets/244b53a4-cc12-4158-bc84-e1144fd477b6" />
+
 카메라에서 입력된 320 x 240 RGB 이미지를 초당 30프레임으로 받아 처리합니다.
 
 전처리는 두 단계로 구성했습니다.
@@ -180,9 +231,11 @@ ONNX 변환을 통해 Jetson Nano 실행 환경과의 호환성을 확보하고,
 모델은 224 x 224 x 3 형태의 이미지를 입력으로 받고, 31개 지문자 클래스에 대한 확률값을 출력합니다.
 
 ## 후처리 및 UI
+<img width="2000" height="1125" alt="ui_design" src="https://github.com/user-attachments/assets/9394bf5b-963e-4844-8083-7a4d2965fc37" />
+<img width="2000" height="1125" alt="preprocessing" src="https://github.com/user-attachments/assets/eecb5165-5ca7-4e64-bf02-b73bc3cb3dea" />
+
 
 모델 출력 결과 중 인식률이 높은 상위 3개의 음소를 UI에 표시합니다. 가장 높은 확률의 음소는 자모 큐에 저장되며, 저장된 자모를 조합하여 한글 문자열로 출력합니다.
-
 UI는 웹 브라우저에서 접속할 수 있도록 구성했으며, 다음 기능을 제공합니다.
 
 - 카메라 이미지 출력
@@ -212,14 +265,18 @@ UI는 웹 브라우저에서 접속할 수 있도록 구성했으며, 다음 기
 두 입력 형태가 달라 모델이 실제 카메라 입력에서 안정적으로 예측하지 못하는 문제가 발생했습니다. 이후 학습 데이터도 MediaPipe 기반으로 손 영역을 crop하여 추론 입력과 동일한 방식으로 맞춘 뒤 인식률이 개선되었습니다.
 
 ### 3. 유사 지문자 오인식 문제
+<img width="1001" height="555" alt="image" src="https://github.com/user-attachments/assets/25042bdd-950d-4119-99ff-ef4b0d1ef3ec" />
 
 일부 지문자는 손 모양이 유사하여 Top-1 결과의 신뢰도가 낮거나 Top-2에 정답이 포함되는 경우가 발생했습니다. 이를 해결하기 위해 Top-3 후보를 UI에 표시하고, 사용자가 잘못 인식된 음소를 수정할 수 있도록 구성했습니다.
 
 ### 4. 자모 조합 후처리 문제
+<img width="984" height="551" alt="image" src="https://github.com/user-attachments/assets/3d14d92f-c33c-444d-8472-77bdd694d5e7" />
 
 지문자는 자음과 모음이 순서대로 입력되기 때문에 음절 조합 규칙이 필요했습니다. 자음 이후 모음이 입력되면 하나의 음절로 조합하고, 종성으로 처리된 자음 뒤에 모음이 입력되면 음절을 분리하는 방식으로 후처리를 설계했습니다.
 
 ## 결과
+<img width="964" height="554" alt="image" src="https://github.com/user-attachments/assets/54708492-144f-4827-9887-bf7abe345d23" />
+<img width="745" height="420" alt="image" src="https://github.com/user-attachments/assets/8420c15f-af18-4410-9548-a9759e060f23" />
 
 학습 데이터와 추론 입력 방식을 동일하게 맞춘 뒤, 실제 카메라 입력에서도 의도한 지문자를 예측할 수 있음을 확인했습니다.
 
@@ -241,4 +298,5 @@ UI는 웹 브라우저에서 접속할 수 있도록 구성했으며, 다음 기
 
 ## Thanks
 
-<!-- 여기에 감사합니다 GIF 붙여넣기 -->
+
+<img width="544" height="306" alt="thanks" src="https://github.com/user-attachments/assets/c3bd8318-04ba-4921-8fb0-f823b7276eae" />
