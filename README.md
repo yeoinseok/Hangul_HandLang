@@ -40,11 +40,11 @@ https://youtu.be/wPea2OLFxoQ
 
 ### 실시간 인식 UI
 
-<!-- 여기에 실시간 인식 UI 이미지 붙여넣기 -->
+<img width="642" height="425" alt="demo_ui" src="https://github.com/user-attachments/assets/dc6642b8-010a-4bb9-a8cd-91bfd4285856" />
 
 ### 모델 구조
 
-<!-- 여기에 모델 구조 이미지 붙여넣기 -->
+<img width="2000" height="1125" alt="model_architecture" src="https://github.com/user-attachments/assets/fbd52fda-ef73-4213-a84c-5b0b39ef708e" />
 
 ### ONNX 및 TensorRT 변환 흐름
 
